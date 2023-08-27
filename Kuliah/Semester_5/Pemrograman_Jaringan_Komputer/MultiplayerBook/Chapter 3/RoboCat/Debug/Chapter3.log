@@ -1,0 +1,14 @@
+﻿  RoboCatPCH.cpp
+  Main.cpp
+D:\Project\Vs_Code's_codes\Kuliah\Semester_5\Pemrograman_Jaringan_Komputer\MultiplayerBook\Chapter 3\RoboCat\Src\Main.cpp(5,112): warning C4100: 'nCmdShow': unreferenced formal parameter
+D:\Project\Vs_Code's_codes\Kuliah\Semester_5\Pemrograman_Jaringan_Komputer\MultiplayerBook\Chapter 3\RoboCat\Src\Main.cpp(5,36): warning C4100: 'hInstance': unreferenced formal parameter
+  SocketAddress.cpp
+  SocketAddressFactory.cpp
+  SocketUtil.cpp
+D:\Project\Vs_Code's_codes\Kuliah\Semester_5\Pemrograman_Jaringan_Komputer\MultiplayerBook\Chapter 3\RoboCat\Src\SocketUtil.cpp(90,102): warning C4100: 'ioNaxNfds': unreferenced formal parameter
+  StringUtils.cpp
+  TCPSocket.cpp
+  UDPSocket.cpp
+  Generating Code...
+Main.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
+  Chapter3.vcxproj -> D:\Project\Vs_Code's_codes\Kuliah\Semester_5\Pemrograman_Jaringan_Komputer\MultiplayerBook\Chapter 3\RoboCat\Bin\Debug\Chapter3.exe
