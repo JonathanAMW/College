@@ -1,26 +1,20 @@
-﻿  Main.cpp
-D:\Project\Vs_Code's_codes\Kuliah\Semester_5\Pemrograman_Jaringan_Komputer\MultiplayerBook\Chapter 3\RoboCat\Src\Main.cpp(5,112): warning C4100: 'nCmdShow': unreferenced formal parameter
-D:\Project\Vs_Code's_codes\Kuliah\Semester_5\Pemrograman_Jaringan_Komputer\MultiplayerBook\Chapter 3\RoboCat\Src\Main.cpp(5,36): warning C4100: 'hInstance': unreferenced formal parameter
-  SocketAddress.cpp
-D:\Project\Vs_Code's_codes\Kuliah\Semester_5\Pemrograman_Jaringan_Komputer\MultiplayerBook\Chapter 3\RoboCat\Src\SocketAddress.cpp(9,2): error C2664: 'PCWSTR InetNtopW(INT,const void *,PWSTR,size_t)': cannot convert argument 3 from 'char [128]' to 'PWSTR'
-D:\Project\Vs_Code's_codes\Kuliah\Semester_5\Pemrograman_Jaringan_Komputer\MultiplayerBook\Chapter 3\RoboCat\Src\SocketAddress.cpp(9,67): message : Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or parenthesized function-style cast
+﻿  SocketAddress.cpp
+D:\Project\Vs_Code's_codes\College\Kuliah\Semester_5\Pemrograman_Jaringan_Komputer\MultiplayerBook\Chapter 3\RoboCat\Src\SocketAddress.cpp(9,2): error C2664: 'PCWSTR InetNtopW(INT,const void *,PWSTR,size_t)': cannot convert argument 3 from 'char [128]' to 'PWSTR'
+D:\Project\Vs_Code's_codes\College\Kuliah\Semester_5\Pemrograman_Jaringan_Komputer\MultiplayerBook\Chapter 3\RoboCat\Src\SocketAddress.cpp(9,67): message : Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or parenthesized function-style cast
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\Ws2tcpip.h(602,1): message : see declaration of 'InetNtopW'
-D:\Project\Vs_Code's_codes\Kuliah\Semester_5\Pemrograman_Jaringan_Komputer\MultiplayerBook\Chapter 3\RoboCat\Src\SocketAddress.cpp(9,2): message : while trying to match the argument list '(const ADDRESS_FAMILY, in_addr *, char [128], size_t)'
+D:\Project\Vs_Code's_codes\College\Kuliah\Semester_5\Pemrograman_Jaringan_Komputer\MultiplayerBook\Chapter 3\RoboCat\Src\SocketAddress.cpp(9,2): message : while trying to match the argument list '(const ADDRESS_FAMILY, in_addr *, char [128], size_t)'
   SocketAddressFactory.cpp
-  SocketUtil.cpp
-D:\Project\Vs_Code's_codes\Kuliah\Semester_5\Pemrograman_Jaringan_Komputer\MultiplayerBook\Chapter 3\RoboCat\Src\SocketUtil.cpp(90,102): warning C4100: 'ioNaxNfds': unreferenced formal parameter
   StringUtils.cpp
-D:\Project\Vs_Code's_codes\Kuliah\Semester_5\Pemrograman_Jaringan_Komputer\MultiplayerBook\Chapter 3\RoboCat\Src\StringUtils.cpp(58,2): error C2664: 'void OutputDebugStringW(LPCWSTR)': cannot convert argument 1 from 'char [4096]' to 'LPCWSTR'
-D:\Project\Vs_Code's_codes\Kuliah\Semester_5\Pemrograman_Jaringan_Komputer\MultiplayerBook\Chapter 3\RoboCat\Src\StringUtils.cpp(58,21): message : Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or parenthesized function-style cast
+D:\Project\Vs_Code's_codes\College\Kuliah\Semester_5\Pemrograman_Jaringan_Komputer\MultiplayerBook\Chapter 3\RoboCat\Src\StringUtils.cpp(58,2): error C2664: 'void OutputDebugStringW(LPCWSTR)': cannot convert argument 1 from 'char [4096]' to 'LPCWSTR'
+D:\Project\Vs_Code's_codes\College\Kuliah\Semester_5\Pemrograman_Jaringan_Komputer\MultiplayerBook\Chapter 3\RoboCat\Src\StringUtils.cpp(58,21): message : Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or parenthesized function-style cast
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\debugapi.h(61,1): message : see declaration of 'OutputDebugStringW'
-D:\Project\Vs_Code's_codes\Kuliah\Semester_5\Pemrograman_Jaringan_Komputer\MultiplayerBook\Chapter 3\RoboCat\Src\StringUtils.cpp(58,2): message : while trying to match the argument list '(char [4096])'
-D:\Project\Vs_Code's_codes\Kuliah\Semester_5\Pemrograman_Jaringan_Komputer\MultiplayerBook\Chapter 3\RoboCat\Src\StringUtils.cpp(59,2): error C2664: 'void OutputDebugStringW(LPCWSTR)': cannot convert argument 1 from 'const char [2]' to 'LPCWSTR'
-D:\Project\Vs_Code's_codes\Kuliah\Semester_5\Pemrograman_Jaringan_Komputer\MultiplayerBook\Chapter 3\RoboCat\Src\StringUtils.cpp(59,21): message : Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or parenthesized function-style cast
+D:\Project\Vs_Code's_codes\College\Kuliah\Semester_5\Pemrograman_Jaringan_Komputer\MultiplayerBook\Chapter 3\RoboCat\Src\StringUtils.cpp(58,2): message : while trying to match the argument list '(char [4096])'
+D:\Project\Vs_Code's_codes\College\Kuliah\Semester_5\Pemrograman_Jaringan_Komputer\MultiplayerBook\Chapter 3\RoboCat\Src\StringUtils.cpp(59,2): error C2664: 'void OutputDebugStringW(LPCWSTR)': cannot convert argument 1 from 'const char [2]' to 'LPCWSTR'
+D:\Project\Vs_Code's_codes\College\Kuliah\Semester_5\Pemrograman_Jaringan_Komputer\MultiplayerBook\Chapter 3\RoboCat\Src\StringUtils.cpp(59,21): message : Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or parenthesized function-style cast
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\debugapi.h(61,1): message : see declaration of 'OutputDebugStringW'
-D:\Project\Vs_Code's_codes\Kuliah\Semester_5\Pemrograman_Jaringan_Komputer\MultiplayerBook\Chapter 3\RoboCat\Src\StringUtils.cpp(59,2): message : while trying to match the argument list '(const char [2])'
+D:\Project\Vs_Code's_codes\College\Kuliah\Semester_5\Pemrograman_Jaringan_Komputer\MultiplayerBook\Chapter 3\RoboCat\Src\StringUtils.cpp(59,2): message : while trying to match the argument list '(const char [2])'
   TCPSocket.cpp
-D:\Project\Vs_Code's_codes\Kuliah\Semester_5\Pemrograman_Jaringan_Komputer\MultiplayerBook\Chapter 3\RoboCat\Src\TCPSocket.cpp(44,76): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\Project\Vs_Code's_codes\Kuliah\Semester_5\Pemrograman_Jaringan_Komputer\MultiplayerBook\Chapter 3\RoboCat\Src\TCPSocket.cpp(55,74): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-  RoboCatPCH.cpp
+D:\Project\Vs_Code's_codes\College\Kuliah\Semester_5\Pemrograman_Jaringan_Komputer\MultiplayerBook\Chapter 3\RoboCat\Src\TCPSocket.cpp(44,76): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\Project\Vs_Code's_codes\College\Kuliah\Semester_5\Pemrograman_Jaringan_Komputer\MultiplayerBook\Chapter 3\RoboCat\Src\TCPSocket.cpp(55,74): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
   UDPSocket.cpp
   Generating Code...
