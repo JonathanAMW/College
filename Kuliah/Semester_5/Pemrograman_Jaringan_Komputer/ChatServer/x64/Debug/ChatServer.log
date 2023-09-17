@@ -1,2 +1,3 @@
-﻿  chat_server.cpp
-  ChatServer.vcxproj -> D:\Project\Vs_Code's_codes\College\Kuliah\Semester_5\Pemrograman_Jaringan_Komputer\ChatServer\x64\Debug\ChatServer.exe
+﻿  ChatServer_Struct.cpp
+D:\Project\Vs_Code's_codes\College\Kuliah\Semester_5\Pemrograman_Jaringan_Komputer\ChatServer\ChatServer_Struct.cpp(129,49): error C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Project\Vs_Code's_codes\College\Kuliah\Semester_5\Pemrograman_Jaringan_Komputer\ChatServer\ChatServer_Struct.cpp(136,17): error C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
