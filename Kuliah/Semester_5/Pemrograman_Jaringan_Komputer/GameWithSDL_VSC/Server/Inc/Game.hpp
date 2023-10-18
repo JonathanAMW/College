@@ -16,13 +16,6 @@
 #include "Config.hpp"
 
 
-enum class ClientMode{
-    DUMMY_VALUE,
-    SERVER,
-    CLIENT
-};
-
-
 class Game
 {
 private:

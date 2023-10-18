@@ -19,6 +19,14 @@ Tank::~Tank()
 
 }
 
+void Tank::PrinTankStats()
+{
+    std::cout << "x: " << _xCenterPos << std::endl;
+    std::cout << "y: " <<_yCenterPos << std::endl;
+    std::cout << "r: " <<_rotation << std::endl;
+}
+
+
 void Tank::Init(std::shared_ptr<Tank> enemyTank)
 {
     _enemyTank = enemyTank;
@@ -34,13 +42,16 @@ void Tank::Sync(TankState tankState)
     _yCenterPos = tankState.y;
     _rotation = tankState.rotation;
     _lastBulletFireTime = tankState._lastBulletFireTime;
-    
+
+    // std::cout << "Sync: xCenterPos = " << _xCenterPos << ", yCenterPos = " << _yCenterPos << ", rotation = " << _rotation << ", lastBulletFireTime = " << _lastBulletFireTime << std::endl;
 
     // Update bullets based on the received state
     for (int i = 0; i < MAX_BULLETS; i++) {
         _bulletsOwned[i]->Sync(tankState._bulletsOwnedState[i]);
+        // std::cout << "Bullet " << i << " synced: x = " << _bulletsOwned[i]->GetBulletState().x << ", y = " << _bulletsOwned[i]->GetBulletState().y << std::endl;
     }
 }
+
 
 TankState Tank::GetTankState()
 {
@@ -74,6 +85,7 @@ void Tank::Update()
 
 
 void Tank::Fire() {
+
     const Uint8* keyboardState = SDL_GetKeyboardState(nullptr);
     Uint32 currentTime = SDL_GetTicks();
 
@@ -150,7 +162,7 @@ void Tank::Move()
 
 void Tank::TakeDamage()
 {
-    std::cout << "mati tank\n";
+    // std::cout << "mati tank\n";
 }
 
 

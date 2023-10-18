@@ -1,4 +1,6 @@
 // GameState.cpp
+#include <iostream>
+
 #include "GameState.hpp"
 
 GameState::GameState() {
@@ -9,17 +11,86 @@ GameState::GameState() {
 //ambil state tank pemain dan set untuk dikirimkan
 void GameState::SetThisClientTankAndItsBulletState(std::shared_ptr<Tank> playerTank) 
 {
+    //set sudah benar
+
     _playerTankAndItsBulletState = playerTank->GetTankState();
+
+    std::cout << _playerTankAndItsBulletState.x << std::endl;
+    std::cout << _playerTankAndItsBulletState.y << std::endl;
+    std::cout << _playerTankAndItsBulletState.rotation << std::endl;
 }
 
-//kembalikan nilai 
+//kembalikan nilai tnk pemain untuk dikirim nantinya
 TankState GameState::GetThisClientTankAndItsBulletState()
 {
     return _playerTankAndItsBulletState;
 }
 
+
+//set enemy tank state according to received data
 void GameState::SyncThisClientOtherTankAndItsBulletState(std::shared_ptr<Tank> enemyTank) 
 {
     enemyTank->Sync(_enemyTankAndItsBulletState);
 }
+
+
+void GameState::Serialize(char* buffer, int bufferSize) const {
+    if (bufferSize < sizeof(TankState)) {
+        std::cerr << "Buffer size is too small for serialization." << std::endl;
+        return;
+    }
+
+    // Serialize player tank state
+    memcpy(buffer, &_playerTankAndItsBulletState, sizeof(TankState));
+}
+
+void GameState::Deserialize(const char* buffer, int bufferSize) {
+    if (bufferSize < sizeof(TankState)) {
+        std::cerr << "Received buffer is too small for deserialization." << std::endl;
+        return;
+    }
+
+    // Deserialize player tank state
+    memcpy(&_enemyTankAndItsBulletState, buffer, sizeof(TankState));
+}
+
+void GameState::Serialize(char* buffer, int bufferSize, std::string test) const {
+    if (bufferSize < sizeof(TankState)) {
+        std::cerr << "Buffer size is too small for serialization." << std::endl;
+        return;
+    }
+
+    // Serialize player tank state
+    memcpy(buffer, &_playerTankAndItsBulletState, sizeof(TankState));
+}
+
+void GameState::Deserialize(const char* buffer, int bufferSize, std::string test) {
+    if (bufferSize < sizeof(TankState)) {
+        std::cerr << "Received buffer is too small for deserialization." << std::endl;
+        return;
+    }
+
+    // Deserialize player tank state
+    memcpy(&_playerTankAndItsBulletState, buffer, sizeof(TankState));
+}
+
+
+
+
+
+// void GameState::PrintGameState() const {
+//     std::cout << "Player Tank State:" << std::endl;
+//     std::cout << "x: " << _playerTankAndItsBulletState.x << std::endl;
+//     std::cout << "y: " << _playerTankAndItsBulletState.y << std::endl;
+//     std::cout << "rotation: " << _playerTankAndItsBulletState.rotation << std::endl;
+
+//     std::cout << "Bullets Owned:" << std::endl;
+//     for (int i = 0; i < MAX_BULLETS; i++) {
+//         std::cout << "Bullet " << i << ":" << std::endl;
+//         std::cout << "x: " << _playerTankAndItsBulletState._bulletsOwnedState[i].x << std::endl;
+//         std::cout << "y: " << _playerTankAndItsBulletState._bulletsOwnedState[i].y << std::endl;
+//         // Print other bullet state members as needed
+//     }
+// }
+
 

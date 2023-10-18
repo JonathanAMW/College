@@ -2,7 +2,6 @@
 
 const char* SERVER_IP = "127.0.0.1"; // Change this to the server's IP
 
-
 ConnectionManager::ConnectionManager() : serverSocket(nullptr), clientSocket(nullptr) {
     if (SDLNet_Init() == -1) {
         std::cerr << "SDLNet_Init() failed: " << SDLNet_GetError() << std::endl;
@@ -81,30 +80,70 @@ int ConnectionManager::RunAsClient() {
     return 0; // Success
 }
 
-int ConnectionManager::SendData(const void* data, int dataLength) {
-    if (clientSocket) {
-        int sentBytes = SDLNet_TCP_Send(clientSocket, data, dataLength);
-        if (sentBytes <= 0) {
-            // std::cerr << "Failed to send data" << std::endl;
-            // Handle send error
-            return -1;
+int ConnectionManager::SendData(const GameState& gameState, ClientMode clientMode) {
+    // char buffer[sizeof(GameState)];
+    // gameState.Serialize(buffer, sizeof(buffer));
+
+    // Sending data:
+    char buffer[sizeof(TankState)];
+    gameState.Serialize(buffer, sizeof(buffer));
+
+
+    if (clientMode == ClientMode::SERVER) {
+        if (clientSocket) {
+            int sentBytes = SDLNet_TCP_Send(clientSocket, buffer, sizeof(buffer));
+            if (sentBytes <= 0) {
+                std::cerr << "Failed to send data: " << SDLNet_GetError() << std::endl;
+                return -1;
+            }
+        }
+
+    } else if (clientMode == ClientMode::CLIENT) {
+        if (serverSocket) {
+            int sentBytes = SDLNet_TCP_Send(serverSocket, buffer, sizeof(buffer));
+            if (sentBytes <= 0) {
+                std::cerr << "Failed to send data: " << SDLNet_GetError() << std::endl;
+                return -1;
+            }
         }
     }
 
     return 0; // Success
 }
 
-int ConnectionManager::ReceiveData(void* data, int maxDataLength) {
-    if (serverSocket) {
-        int receivedBytes = SDLNet_TCP_Recv(serverSocket, data, maxDataLength);
-        if (receivedBytes <= 0) {
-            // std::cerr << "Failed to receive data" << std::endl;
-            // Handle receive error or connection closed
-            return -1;
-        }
+int ConnectionManager::ReceiveData(GameState& gameState, ClientMode clientMode) {
+    // char buffer[sizeof(GameState)];
 
-        return receivedBytes;
+    // Receiving data:
+    char buffer[sizeof(TankState)];
+   
+    if (clientMode == ClientMode::SERVER) {
+        if (clientSocket) {
+            int receivedBytes = SDLNet_TCP_Recv(clientSocket, buffer, sizeof(buffer));
+            if (receivedBytes <= 0) {
+                std::cerr << "Failed to receive data: " << SDLNet_GetError() << std::endl;
+                return -1;
+            }
+            // gameState.Deserialize(buffer, sizeof(buffer));
+            gameState.Deserialize(buffer, sizeof(buffer));
+
+            return receivedBytes;
+        }
+    } else if (clientMode == ClientMode::CLIENT) {
+        if (serverSocket) {
+            int receivedBytes = SDLNet_TCP_Recv(serverSocket, buffer, sizeof(buffer));
+            if (receivedBytes <= 0) {
+                std::cerr << "Failed to receive data: " << SDLNet_GetError() << std::endl;
+                return -1;
+            }
+            // gameState.Deserialize(buffer, sizeof(buffer));
+            gameState.Deserialize(buffer, sizeof(buffer));
+
+            return receivedBytes;
+        }
     }
 
     return 0; // No data received
 }
+
+

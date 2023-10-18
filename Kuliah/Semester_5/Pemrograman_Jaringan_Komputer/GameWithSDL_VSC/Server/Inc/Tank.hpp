@@ -38,7 +38,6 @@ public:
     void DrawCollider();
     void Update();
     void Sync(TankState);
-    void Update(const TankState&);
     void UpdateBullets(std::shared_ptr<RendererManager> rendererManager);
     void TakeDamage();
     void Init(std::shared_ptr<Tank> enemyTank);
@@ -47,6 +46,9 @@ public:
     TankState GetTankState();
     void SetTankState(std::shared_ptr<TankState>);
     std::vector<std::shared_ptr<Bullet>> GetBulletsOwned();
+
+
+    void PrinTankStats();
 
 };  
 

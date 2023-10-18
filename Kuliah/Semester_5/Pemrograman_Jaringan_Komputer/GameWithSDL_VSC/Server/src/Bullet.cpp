@@ -40,11 +40,13 @@ void Bullet::Sync(BulletState bulletState)
     _currentTime = bulletState._currentTime;
     _isStarted = bulletState._isStarted;
     _isDestroyed = bulletState._isDestroyed;
+
+    DrawCollider();
+    Update();
 }
 
 void Bullet::Init(float xInitPos, float yInitPos, float rotation, float xInitVelocity, float yInitVelocity, std::shared_ptr<Tank> enemyTank)
 {
-    std::cout << "bulelt got init\n";
     _xCenterPos = xInitPos;
     _yCenterPos = yInitPos;
     _xVelocity = xInitVelocity;
@@ -83,8 +85,6 @@ void Bullet::Update()
     // Calculate the elapsed time since the bullet was created
     if(!_isStarted)
     {
-        std::cout << "bulelt got started\n";
-
         _isStarted = true;
         _isDestroyed = false;
         _currentTime = SDL_GetTicks();

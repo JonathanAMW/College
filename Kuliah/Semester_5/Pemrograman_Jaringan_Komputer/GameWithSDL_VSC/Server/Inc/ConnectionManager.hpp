@@ -4,6 +4,10 @@
 #include <iostream>
 #include <SDL2/SDL_net.h>
 
+
+#include "Config.hpp"
+#include "GameState.hpp"
+
 const int SERVER_PORT = 12345; // Change to your desired port
 
 class ConnectionManager {
@@ -14,8 +18,8 @@ public:
     int Init(std::string connectionType);
     int RunAsServer();
     int RunAsClient();
-    int SendData(const void* data, int dataLength);
-    int ReceiveData(void* data, int maxDataLength);
+    int SendData(const GameState& gameState, ClientMode clientMode);
+    int ReceiveData(GameState& gameState, ClientMode clientMode);
 
 private:
     TCPsocket serverSocket;
