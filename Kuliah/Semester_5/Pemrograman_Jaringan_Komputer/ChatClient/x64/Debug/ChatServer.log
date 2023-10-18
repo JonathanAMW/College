@@ -1,4 +1,0 @@
-﻿D:\Tools\Visual Studio Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (ChatServer.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  ChatClient_Struct.cpp
-D:\Project\Vs_Code's_codes\College\Kuliah\Semester_5\Pemrograman_Jaringan_Komputer\ChatClient\ChatClient_Struct.cpp(51,75): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-  ChatServer.vcxproj -> D:\Project\Vs_Code's_codes\College\Kuliah\Semester_5\Pemrograman_Jaringan_Komputer\ChatClient\x64\Debug\ChatClient.exe

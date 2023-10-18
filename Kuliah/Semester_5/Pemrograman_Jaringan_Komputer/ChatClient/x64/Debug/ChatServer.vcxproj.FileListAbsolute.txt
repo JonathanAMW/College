@@ -1,2 +1,0 @@
-D:\Project\Vs_Code's_codes\College\Kuliah\Semester_5\Pemrograman_Jaringan_Komputer\ChatServer\x64\Debug\ChatServer.exe
-D:\Project\Vs_Code's_codes\College\Kuliah\Semester_5\Pemrograman_Jaringan_Komputer\ChatClient\x64\Debug\ChatClient.exe
