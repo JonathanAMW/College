@@ -18,8 +18,10 @@ public:
     int Init(std::string connectionType);
     int RunAsServer();
     int RunAsClient();
-    int SendData(const GameState& gameState, ClientMode clientMode);
-    int ReceiveData(GameState& gameState, ClientMode clientMode);
+    // int SendData(const GameState& gameState, ClientMode clientMode);
+    // int ReceiveData(GameState& gameState, ClientMode clientMode);
+    bool SendData(const GameState& gameState, ClientMode clientMode);
+    bool ReceiveData(GameState& gameState, ClientMode clientMode);
 
 private:
     TCPsocket serverSocket;

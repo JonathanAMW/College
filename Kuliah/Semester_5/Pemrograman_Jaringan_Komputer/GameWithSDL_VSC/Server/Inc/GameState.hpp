@@ -44,10 +44,6 @@ public:
     // Deserialize a byte array into a GameState object after receiving
     void Deserialize(const char* buffer, int bufferSize);
 
-void GameState::Serialize(char* buffer, int bufferSize, std::string test) const; 
-void GameState::Deserialize(const char* buffer, int bufferSize, std::string test) ;
-
-
     void PrintGameState() const;
 private:
     TankState _playerTankAndItsBulletState; //something that will be set by this client and send to other client
