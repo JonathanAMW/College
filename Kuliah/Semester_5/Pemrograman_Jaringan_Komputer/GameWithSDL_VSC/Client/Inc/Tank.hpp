@@ -29,10 +29,14 @@ private:
     Uint32 _lastBulletFireTime = 0;
     std::shared_ptr<TankState> _tankState;
 
+    int _defaultXPos, _defaultYPos;
+    float _defaultRotation;
+
 public:
     Tank(int, int, float);
     ~Tank();
     void Fire();
+    void Reset();
     void Move();
     void DrawRender(std::shared_ptr<RendererManager> rendererManager, SDL_Color tankColor, SDL_Color turretColor);
     void DrawCollider();

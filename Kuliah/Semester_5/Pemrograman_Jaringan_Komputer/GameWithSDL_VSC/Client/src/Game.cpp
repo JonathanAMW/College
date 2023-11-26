@@ -1,9 +1,5 @@
 #include "Game.hpp"
 
-// bool IsTesting = true;
-// char buffer[sizeof(TankState)];
-
-
 std::shared_ptr<Tank> StoredInitializedTanks[MAX_PLAYERS];
 
 std::shared_ptr<RendererManager> gameRenderer;  
@@ -34,8 +30,8 @@ void Game::Setup()
     StoredInitializedTanks[0] = Player1;
     StoredInitializedTanks[1] = Player2;
 
-    Player1->Init(Player2);
-    Player2->Init(Player1);
+    StoredInitializedTanks[0]->Init(StoredInitializedTanks[1]);
+    StoredInitializedTanks[1]->Init(StoredInitializedTanks[0]);
 
     Update();
 }
@@ -65,79 +61,28 @@ void Game::Update() {
                 _clientMode = ClientMode::SERVER;
                 if (gameConnectionManager->RunAsServer() != 0) {
                     // Handle server setup error
+                    isRunning = false;
+                    std::cerr << "Running as server is failed" << std::endl;
+                    break;
+
                 }
             } else if (gameMainMenu->IsClientSelected()) {
                 _clientMode = ClientMode::CLIENT;
                 if (gameConnectionManager->RunAsClient() != 0) {
                     // Handle client setup error
+                    isRunning = false;
+                    std::cerr << "Running as client is failed" << std::endl;
+                    break;
+
                 }
             }
         } else {
-            // if(IsTesting)
-            // {
-            //     bool IsValid = true;
 
-            //     //get data from client and sync it
-
-            //     // int receivedBytes = gameConnectionManager->ReceiveData(serverGameState, _clientMode);
-                
-            //     serverGameState.Deserialize(buffer, sizeof(buffer));
-
-                
-            //     if (buffer == nullptr) {
-            //         IsValid = false;
-            //     }
-
-            //     if(IsValid)
-            //     {
-            //         std::cout << "\nserver enemy tank updating\n";
-            //         serverGameState.SyncThisClientOtherTankAndItsBulletState(StoredInitializedTanks[1]);
-            //         // StoredInitializedTanks[1]->PrinTankStats();
-
-            //     }
-
-            //     StoredInitializedTanks[1]->DrawRender(gameRenderer, blueColor, yellowColor);
-            //     StoredInitializedTanks[1]->UpdateBullets(gameRenderer);
-
-            //     // Update and draw game objects using clientGameState
-            //     StoredInitializedTanks[0]->Update();
-            //     StoredInitializedTanks[0]->DrawRender(gameRenderer, redColor, yellowColor);
-            //     StoredInitializedTanks[0]->UpdateBullets(gameRenderer);
-
-            //     //set data from server and send it to client
-            //     serverGameState.SetThisClientTankAndItsBulletState(StoredInitializedTanks[0]);
-
-            //     serverGameState.Serialize(buffer, sizeof(buffer));
-
-            //     // gameConnectionManager->SendData(serverGameState, _clientMode);
-            // }
-            // else
-            // Handle user input
-            // Update game logic, tank positions, etc.
             if (_clientMode == ClientMode::SERVER) {
-                // bool IsValid = true;
-
-                // //get data from client and sync it
-
-                // int receivedBytes = gameConnectionManager->ReceiveData(serverGameState, _clientMode);
-                // if (receivedBytes < 0) {
-                //     IsValid = false;
-                // }
-
-                // if(IsValid)
-                // {
-                //     //std::cout << "server enemy tank updating\n";
-                //     serverGameState.SyncThisClientOtherTankAndItsBulletState(StoredInitializedTanks[1]);
-                //     // StoredInitializedTanks[1]->PrinTankStats();
-
-                // }
-
-                if(gameConnectionManager->ReceiveData(serverGameState, _clientMode))
+                
+                if(!gameConnectionManager->SendData(serverGameState, _clientMode))
                 {
-                    //std::cout << "server enemy tank updating\n";
-                    serverGameState.SyncThisClientOtherTankAndItsBulletState(StoredInitializedTanks[1]);
-                    // StoredInitializedTanks[1]->PrinTankStats();
-
+                    std::cout << "\nSending Data Failed!\n";
                 }
 
                 StoredInitializedTanks[1]->DrawRender(gameRenderer, blueColor, yellowColor);
@@ -151,9 +96,12 @@ void Game::Update() {
                 //set data from server and send it to client
                 serverGameState.SetThisClientTankAndItsBulletState(StoredInitializedTanks[0]);
                 
-                if(!gameConnectionManager->SendData(serverGameState, _clientMode))
+                if(gameConnectionManager->ReceiveData(clientGameState, _clientMode))
                 {
-                    std::cout << "\nSending Data Failed!\n";
+                    //std::cout << "server enemy tank updating\n";
+                    clientGameState.SyncThisClientOtherTankAndItsBulletState(StoredInitializedTanks[1]);
+                    // StoredInitializedTanks[1]->PrinTankStats();
+
                 }
                 
 
@@ -162,7 +110,7 @@ void Game::Update() {
                 if(gameConnectionManager->ReceiveData(serverGameState, _clientMode))
                 {
                     //std::cout << "server enemy tank updating\n";
-                    serverGameState.SyncThisClientOtherTankAndItsBulletState(StoredInitializedTanks[1]);
+                    serverGameState.SyncThisClientOtherTankAndItsBulletState(StoredInitializedTanks[0]);
                     // StoredInitializedTanks[1]->PrinTankStats();
 
                 }

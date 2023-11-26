@@ -12,6 +12,8 @@ Bullet::~Bullet()
 
 BulletState Bullet::GetBulletState()
 {
+    std::cout << "get bullet state" << std::endl;
+
     BulletState newBulletState;
     newBulletState.x = _xCenterPos;
     newBulletState.x = _xCenterPos;
@@ -30,6 +32,8 @@ BulletState Bullet::GetBulletState()
 
 void Bullet::Sync(BulletState bulletState)
 {
+    std::cout << "sync bullet" << std::endl;
+
     _xCenterPos = bulletState.x;
     _yCenterPos = bulletState.y;
     _xVelocity = bulletState.xVelocity;
@@ -47,6 +51,8 @@ void Bullet::Sync(BulletState bulletState)
 
 void Bullet::Init(float xInitPos, float yInitPos, float rotation, float xInitVelocity, float yInitVelocity, std::shared_ptr<Tank> enemyTank)
 {
+    std::cout << "init bullet" << std::endl;
+
     _xCenterPos = xInitPos;
     _yCenterPos = yInitPos;
     _xVelocity = xInitVelocity;
@@ -76,7 +82,8 @@ void Bullet::DrawRender(std::shared_ptr<RendererManager> renderer)
 
 void Bullet::DrawCollider() 
 {
-    _bulletCollider = ColliderFactory::CreateCircleCollider(_xCenterPos, _yCenterPos, _rotation, _enemyTank, _radius);
+    // _bulletCollider = ColliderFactory::CreateCircleCollider(_xCenterPos, _yCenterPos, _rotation, _enemyTank, _radius);
+    _bulletCollider = ColliderFactory::CreateCircleCollider(_xCenterPos, _yCenterPos, _rotation, shared_from_this(), _radius);
 }
 
 
@@ -112,11 +119,22 @@ void Bullet::Update()
 
     }
 
-    
-    _bulletCollider->UpdateColliderPositionRotation();
+    std::cerr << "\nupdate bullet collider" << std::endl;
+    _bulletCollider->Update();
 
     // Check for collisions and apply any logic for hits on enemies here.
-    CheckCollision(_enemyTank->GetTankCollider());
+    std::cerr << "\ncheck bullet collision" << std::endl;
+    if(_enemyTank == nullptr)
+    {
+        std::cerr << "enemy tank is null" << std::endl;
+        return;
+    }
+    else
+    {
+        std::cerr << "enemy tank is not null" << std::endl;
+        CheckCollision(_enemyTank->GetTankCollider());
+
+    }
 }
 
 
@@ -133,11 +151,29 @@ bool Bullet::GetIsStarted()
 
 void Bullet::CheckCollision(std::shared_ptr<Collider2D> otherTankCollider)
 {
-    if(_bulletCollider->CheckCollision(otherTankCollider))
+    std::cerr << "\ncheck bullet collision 2" << std::endl;
+
+    if (!otherTankCollider)
     {
+        std::cerr << "enemy tank collider is null" << std::endl;
+        return;
+    }
+    else
+    {
+        std::cerr << "enemy tank collider is not null" << std::endl;
+    }
+
+    if (_bulletCollider->CheckCollision(otherTankCollider))
+    {
+        std::cerr << "enemy tank die" << std::endl;
         _enemyTank->TakeDamage();
     }
+    else
+    {
+        
+    }
 }
+
 
 std::shared_ptr<Collider2D> Bullet::GetBulletCollider() 
 const{

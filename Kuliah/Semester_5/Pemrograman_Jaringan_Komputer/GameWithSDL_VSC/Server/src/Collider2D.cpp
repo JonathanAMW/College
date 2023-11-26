@@ -12,7 +12,10 @@ Collider2D::Collider2D(int x, int y, float rotation, std::shared_ptr<GameObject>
 }
 
 void Collider2D::Update() {
+    std::cerr << "updating collider position" << std::endl;
     UpdateColliderPositionRotation();
+
+    std::cerr << "calculating collider bounding box" << std::endl;
     CalculateBoundingBox();
 }
 
@@ -26,10 +29,12 @@ void Collider2D::CalculateBoundingBox() {
 
 bool Collider2D::CheckCollision(std::shared_ptr<Collider2D> other) {
     // Perform collision check using bounding boxes
+    std::cerr << "collider check collision" << std::endl;
     return (_boundingBoxX + _boundingBoxWidth >= other->_boundingBoxX &&
             _boundingBoxX <= other->_boundingBoxX + other->_boundingBoxWidth &&
             _boundingBoxY + _boundingBoxHeight >= other->_boundingBoxY &&
             _boundingBoxY <= other->_boundingBoxY + other->_boundingBoxHeight);
+    std::cerr << "collider end check collision" << std::endl;
 }
 
 void Collider2D::UpdateColliderPositionRotation() {

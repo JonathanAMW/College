@@ -11,13 +11,7 @@ GameState::GameState() {
 //ambil state tank pemain dan set untuk dikirimkan
 void GameState::SetThisClientTankAndItsBulletState(std::shared_ptr<Tank> playerTank) 
 {
-    //set sudah benar
-
     _playerTankAndItsBulletState = playerTank->GetTankState();
-
-    // std::cout << _playerTankAndItsBulletState.x << std::endl;
-    // std::cout << _playerTankAndItsBulletState.y << std::endl;
-    // std::cout << _playerTankAndItsBulletState.rotation << std::endl;
 }
 
 //kembalikan nilai tnk pemain untuk dikirim nantinya
@@ -30,13 +24,7 @@ TankState GameState::GetThisClientTankAndItsBulletState()
 //set enemy tank state according to received data
 void GameState::SyncThisClientOtherTankAndItsBulletState(std::shared_ptr<Tank> enemyTank) 
 {
-    // std::cout << _enemyTankAndItsBulletState.x << std::endl;
-    // std::cout << _enemyTankAndItsBulletState.y << std::endl;
-    // std::cout << _enemyTankAndItsBulletState.rotation << std::endl;
-
     enemyTank->Sync(_enemyTankAndItsBulletState);
-
-
 }
 
 
@@ -46,11 +34,6 @@ void GameState::Serialize(char* buffer, int bufferSize) const {
         std::cerr << "Buffer size is too small for serialization." << std::endl;
         return;
     }
-
-    // std::cout << "hasil serialize" << std::endl;
-    // std::cout << _playerTankAndItsBulletState.x << std::endl;
-    // std::cout << _playerTankAndItsBulletState.y << std::endl;
-    // std::cout << _playerTankAndItsBulletState.rotation << std::endl;
 
     // Serialize player tank state
     memcpy(buffer, &_playerTankAndItsBulletState, sizeof(TankState));
@@ -62,36 +45,6 @@ void GameState::Deserialize(const char* buffer, int bufferSize) {
         return;
     }
 
-    
-
     // Deserialize player tank state
     memcpy(&_enemyTankAndItsBulletState, buffer, sizeof(TankState));
-
-
-    // std::cout << "hasil deserialize" << std::endl;
-    // std::cout << _enemyTankAndItsBulletState.x << std::endl;
-    // std::cout << _enemyTankAndItsBulletState.y << std::endl;
-    // std::cout << _enemyTankAndItsBulletState.rotation << std::endl;
 }
-
-
-
-
-
-
-// void GameState::PrintGameState() const {
-//     std::cout << "Player Tank State:" << std::endl;
-//     std::cout << "x: " << _playerTankAndItsBulletState.x << std::endl;
-//     std::cout << "y: " << _playerTankAndItsBulletState.y << std::endl;
-//     std::cout << "rotation: " << _playerTankAndItsBulletState.rotation << std::endl;
-
-//     std::cout << "Bullets Owned:" << std::endl;
-//     for (int i = 0; i < MAX_BULLETS; i++) {
-//         std::cout << "Bullet " << i << ":" << std::endl;
-//         std::cout << "x: " << _playerTankAndItsBulletState._bulletsOwnedState[i].x << std::endl;
-//         std::cout << "y: " << _playerTankAndItsBulletState._bulletsOwnedState[i].y << std::endl;
-//         // Print other bullet state members as needed
-//     }
-// }
-
-

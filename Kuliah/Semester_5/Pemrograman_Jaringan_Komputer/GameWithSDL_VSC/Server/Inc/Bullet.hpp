@@ -12,7 +12,7 @@
 class Tank;
 struct BulletState;
 
-class Bullet : public GameObject
+class Bullet : public GameObject, public std::enable_shared_from_this<Bullet>
 {
 public:
     Bullet();

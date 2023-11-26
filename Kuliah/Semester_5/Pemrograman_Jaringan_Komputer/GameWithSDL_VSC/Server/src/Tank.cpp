@@ -7,6 +7,10 @@ Tank::Tank(int xCenterPos, int yCenterPos, float rotation)
     _yCenterPos = yCenterPos;
     _rotation = rotation;
 
+    _defaultXPos = xCenterPos;
+    _defaultYPos = yCenterPos;
+    _defaultRotation = rotation;
+
     for(int i = 0; i < MAX_BULLETS; i++)
     {
         _bulletsOwned[i] = std::make_shared<Bullet>();
@@ -31,9 +35,15 @@ void Tank::Init(std::shared_ptr<Tank> enemyTank)
 {
     _enemyTank = enemyTank;
 
+    while(_enemyTank == nullptr)
+    {
+        _enemyTank = enemyTank;
+        std::cerr << "Enemy tank still null" << std::endl;
+    }
+
     DrawCollider();
     
-    Update();
+    // Update();
 }
 
 void Tank::Sync(TankState tankState)
@@ -162,7 +172,16 @@ void Tank::Move()
 
 void Tank::TakeDamage()
 {
-    // std::cout << "mati tank\n";
+    std::cerr << "this tank died" << std::endl;
+
+    Reset();
+}
+
+void Tank::Reset()
+{
+    _xCenterPos = _defaultXPos;
+    _yCenterPos = _defaultYPos;
+    _rotation = _defaultRotation;
 }
 
 
@@ -235,5 +254,15 @@ void Tank::DrawCollider()
 
 std::shared_ptr<Collider2D> Tank::GetTankCollider()
 {
+    if(_tankCollider == nullptr)
+    {
+        std::cerr << "tank collider is null" << std::endl;
+        return std::shared_ptr<Collider2D>();
+    }
+    else
+    {
+        std::cerr << "tank collider is not null" << std::endl;
+    }
+
     return _tankCollider;
 }
