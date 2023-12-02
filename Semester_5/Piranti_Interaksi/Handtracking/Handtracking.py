@@ -1,52 +1,60 @@
 import cv2
 import mediapipe as mp
+import socket
+from collections import deque
 
-mp_drawing = mp.solutions.drawing_utils
+# Create a UDP socket
+udp_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
+# Define the IP address and port of the receiver (Unity application)
+receiver_ip = '127.0.0.1'  # Change this to the IP address of your Unity application
+receiver_port = 12345  # Change this to the port number of your Unity application
+
 mp_hands = mp.solutions.hands
+hands = mp_hands.Hands(static_image_mode=False, max_num_hands=2, min_detection_confidence=0.5)
 
-# Initialize MediaPipe Hands
-hands = mp_hands.Hands(static_image_mode=False, max_num_hands=1, min_detection_confidence=0.5, min_tracking_confidence=0.5)
+# OpenCV setup
+cap = cv2.VideoCapture(0)  # Use the webcam (change 0 to another number if multiple cameras)
 
-# Open the webcam
-cap = cv2.VideoCapture(0)
+# Create a buffer (deque) to store hand count values
+buffer_size = 2  # Adjust the buffer size as needed for smoothing
+hand_count_buffer = deque(maxlen=buffer_size)
 
 while cap.isOpened():
     ret, frame = cap.read()
     if not ret:
         break
 
-    # Flip the image horizontally for a later selfie-view display
-    frame = cv2.flip(frame, 1)
+    # Convert the image to RGB and process it with MediaPipe
+    image_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    results = hands.process(image_rgb)
 
-    # Convert the BGR image to RGB
-    rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-
-    # Process the image and detect hand landmarks
-    results = hands.process(rgb_frame)
+    # Initialize hand count
+    hand_count = 0
 
     if results.multi_hand_landmarks:
-        for hand_landmarks in results.multi_hand_landmarks:
-            # Get landmark points of the hand
-            index_finger_landmark = hand_landmarks.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP]
+        # Increment the hand count for each detected hand
+        hand_count = len(results.multi_hand_landmarks)
 
-            # Get the coordinates of the tip of the index finger
-            height, width, _ = frame.shape
-            finger_x = int(index_finger_landmark.x * width)
-            finger_y = int(index_finger_landmark.y * height)
+    # Add the hand count to the buffer
+    hand_count_buffer.append(hand_count)
 
-            # Draw a circle at the tip of the index finger
-            cv2.circle(frame, (finger_x, finger_y), 10, (0, 255, 0), -1)
+    # Calculate the mean of the hand count values in the buffer
+    smoothed_hand_count = round(sum(hand_count_buffer) / len(hand_count_buffer))
 
-    # Display the frame with hand landmarks
+    # Simulate recognized gesture data
+    gesture_data = f"{smoothed_hand_count}"  # Sending the smoothed hand count
+    print("Sending gesture data:", gesture_data)
+
+    # Send recognized gestures to the Unity application
+    udp_socket.sendto(gesture_data.encode(), (receiver_ip, receiver_port))
+
+    # Display the frame
     cv2.imshow('Hand Tracking', frame)
-
-    # Press 'q' to exit
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+    if cv2.waitKey(1) & 0xFF == ord('q'):  # Press 'q' to exit the loop
         break
 
-# Release the webcam and close OpenCV windows
+hands.close()
 cap.release()
 cv2.destroyAllWindows()
-
-# Release MediaPipe hands instance
-hands.close()
+udp_socket.close()  # Close the UDP socket after use
