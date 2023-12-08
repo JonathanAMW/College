@@ -134,6 +134,7 @@ bool ConnectionManager::ReceiveData(GameState& gameState, ClientMode connectionT
 
             // Calculate and print the Round-Trip Time (RTT)
             std::chrono::milliseconds rtt = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - receivedTime);
+            // std::cout << "Round-Trip Time (RTT): " << rtt.count() << " ms" << std::endl;
             std::cout << "Round-Trip Time (RTT): " << rtt.count() << " ms" << std::endl;
 
             return true; // Data received successfully

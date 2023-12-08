@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 1929151}
   - component: {fileID: 1929150}
   - component: {fileID: 1929149}
-  m_Layer: 8
+  m_Layer: 4
   m_Name: Cube 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -861,7 +861,7 @@ GameObject:
   - component: {fileID: 531915492}
   - component: {fileID: 531915491}
   - component: {fileID: 531915490}
-  m_Layer: 8
+  m_Layer: 4
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1246,7 +1246,7 @@ MonoBehaviour:
   displayGridGizmos: 0
   unwalkableMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 16
   gridWorldSize: {x: 100, y: 100}
   nodeRadius: 0.5
 --- !u!4 &653548175
@@ -1594,7 +1594,7 @@ GameObject:
   - component: {fileID: 1028190812}
   - component: {fileID: 1028190811}
   - component: {fileID: 1028190810}
-  m_Layer: 8
+  m_Layer: 4
   m_Name: Cube 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1716,12 +1716,12 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1671852229}
   - {fileID: 1968263583}
   - {fileID: 112003653}
   - {fileID: 612248027}
   - {fileID: 2139406695}
   - {fileID: 747910255}
-  - {fileID: 1671852229}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1369926898
@@ -1736,7 +1736,7 @@ GameObject:
   - component: {fileID: 1369926902}
   - component: {fileID: 1369926901}
   - component: {fileID: 1369926900}
-  m_Layer: 8
+  m_Layer: 4
   m_Name: Cube 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1957,7 +1957,7 @@ MonoBehaviour:
   displayGridGizmos: 0
   unwalkableMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 16
   gridWorldSize: {x: 100, y: 100}
   nodeRadius: 0.5
 --- !u!4 &1671852229
@@ -2290,7 +2290,7 @@ GameObject:
   - component: {fileID: 1840817992}
   - component: {fileID: 1840817991}
   - component: {fileID: 1840817990}
-  m_Layer: 8
+  m_Layer: 4
   m_Name: Cube 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
